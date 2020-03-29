@@ -10,7 +10,7 @@ const express = require("express"),
       methodOverride = require("method-override"),
       http = require("http").Server(app),
       io = require("socket.io")(http),
-      env = require("dotenv").config()
+      environ = require("dotenv").config()
 
 
 mongoose.set('useNewUrlParser', true);
