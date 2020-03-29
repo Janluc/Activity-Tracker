@@ -1,0 +1,61 @@
+<%- include("partials/header") %> 
+
+<div class="jumbotron Landing">
+    <div class="col-12 text-center jumboContent">
+        <h3>
+            Keep Track of anything you might have to do today!
+        </h3>
+        <p>Log in to get started!</p>
+    </div>
+    <button type="button" class="btn login-modal log-in-button" data-toggle="modal" data-target="#exampleModal">
+        Log In!
+      </button>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Log In!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/">
+                        <div class="form-group p-3">
+                                <input class="form-control mt-3" name="username" type="text" placeholder="Username">
+                                <input class="form-control mt-3" name="password" type="password" placeholder="Password">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button class="btn login-modal" >Log In</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div> 
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script>
+
+    
+    $("#scheduleDisplay > li").click(function(){
+       if($(this).css("color") === "rgb(128, 128, 128)"){
+           $(this).css({
+               color: "black",
+               textDecoration: "none"
+           }); 
+       } else{
+           $(this).css({
+               color: "gray",
+               textDecoration: "line-through"
+           })
+       }
+    });
+    </script>
+    
+
+<%- include("partials/footer") %> 

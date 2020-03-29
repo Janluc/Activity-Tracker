@@ -1,0 +1,16 @@
+<%- include("partials/header") %> 
+
+<div class="container sign-up-form col-12">
+    <form method="POST" action="/new">
+        <div class="form-group">
+            <h1 class="text-center mt-3">Sign Up</h1>
+                <input class="form-control mt-3" name="username" type="text" placeholder="Username">
+                <input class="form-control mt-3" name="password" type="password" placeholder="Password">
+                <button class="btn login-modal mt-3" >Sign Up</button>
+        </div>
+    </form>
+    <a href="/">Log In Instead</a>
+</div>
+
+
+<%- include("partials/footer") %> 

@@ -1,0 +1,166 @@
+<%- include("partials/header") %> 
+
+<div class="container">
+    <div class="row justify-content-around mt-3">
+        <div class="col-12 col-md-5 pt-3" style="background-color: white;">
+            
+            <button type="button" class="btn login-modal-button btn-block" data-toggle="modal" data-target="#LogModal">
+                Add a Task!
+              </button>
+              
+              <div class="modal fade" id="LogModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">New Task</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="/schedule/<%=user._id%>/item/new">
+                            <input name ="schedule[description]" type="text" placeholder="New event">
+                            <select name="schedule[category]" id="">
+                                <option value="Education">Education</option>
+                                <option value="Fitness">Fitness</option>
+                                <option value="Work">Work</option>
+                                <option value="Lifestyle">Lifestyle</option>
+                            </select>
+                            <button class="btn login-modal-button rounded-pill">Submit</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <ul class="list-group" id="scheduleDisplay">
+                <% if(user.schedule){ %>
+                <% user.schedule.forEach(function(item){ %>
+        
+        
+                <li class="list-group-item ">
+
+                <div class="row">
+                    <% if(item.category == "Fitness"){ %>
+
+                        <div class="col-2 border-right border-danger"><span><i class="fas fa-dumbbell"></i></span></div>
+
+                   <% } else if(item.category == "Education"){ %>
+
+                        <div class="col-2 border-right border-info"><span><i class="fas fa-book"></i></span></div>
+
+                   <% } else if (item.category == "Work"){ %>
+
+                        <div class="col-2 border-right border-success"><span><i class="fas fa-car-side"></i></span></div>
+
+                   <% } else if (item.category == "Lifestyle") { %>
+
+                        <div class="col-2 border-right border-dark"><span><i class="fas fa-gamepad"></i></span></div>
+
+                   <% } %> 
+                    
+                    
+                    <div class="col-8 text-center"><span class="toDoItem  <%= item.isCompleted == true ? 'completedItem' : '' %>" ><%=item.description%></span></div>
+                    <div class="col-2 text-right ">
+                        <form method="POST" action="/schedule/<%=user._id%>/item/<%=item._id%>?_method=DELETE" style="display: inline">
+                            <button >Del</button>
+                        </form>
+                    </div>  
+                </div>
+
+
+                </li>
+                <% }); %>
+        
+                <% } %>
+        
+        
+            </ul>
+        
+            
+           
+        </div>
+
+    <div class="col-12 col-md-5 mt-3" style="background-color: white;">
+        <canvas id="barChart" style="max-width: 500px;"></canvas>
+
+    <p>Fitness: <%= user.fitness %> Work: <%= user.work %> Education: <%= user.education %> Lifestyle: <%= user.lifestyle %></p>
+
+     </div>
+    </div>
+    
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+
+<script>
+
+//Clientside visual changes  
+$(".toDoItem").click(function(){
+   if($(this).css("color") === "rgb(128, 128, 128)"){
+       $(this).css({
+           color: "black",
+           textDecoration: "none"
+       }); 
+   } else{
+       $(this).css({
+           color: "gray",
+           textDecoration: "line-through"
+       })
+   }
+});
+
+//socket init
+var socket = io()
+var itemID = document.getElementsByClassName('toDoItem')
+//socket emit when clicking on a To Do list item
+    for(var i = 0; i < itemID.length; i++)
+        {
+            itemID[i].addEventListener('click', function(){
+                if(currentUser)
+                socket.emit('identify', {dataID: this.innerText, userID: "<%=currentUser._id%>"})
+                console.log(this.innerText)
+            });
+        }
+
+
+</script>
+<script>
+    var ctxB = document.getElementById("barChart").getContext('2d');
+    var myBarChart = new Chart(ctxB, {
+    type: 'bar',
+    data: {
+    labels: ["Lifestyle", "Work", "Education", "Fitness"],
+    datasets: [{
+    label: '# of Tasks',
+    data: [<%=currentUser.lifestyle%>, <%=currentUser.work%>, <%=currentUser.education%>, <%=currentUser.fitness%>],
+    backgroundColor: [
+    'rgba(15, 15, 15, 0.2)',
+    'rgba(92, 184, 92, 0.2)',
+    'rgba(91, 192, 222, 0.2)',
+    'rgba(217,83,79, 0.2)',
+    ],
+    borderColor: [
+    'rgba(15, 15, 15,1)',
+    'rgba(92, 184, 92, 1)',
+    'rgba(91, 192, 222, 1)',
+    'rgba(217,83,79,1)',
+    ],
+    borderWidth: 1
+    }]
+    },
+    options: {
+    scales: {
+    yAxes: [{
+    ticks: {
+    beginAtZero: true
+    }
+    }]
+    }
+    }
+    });</script>
+
+<%- include("partials/footer") %> 

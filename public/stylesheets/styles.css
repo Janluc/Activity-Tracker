@@ -1,0 +1,67 @@
+body {
+    background-color: #00adb5;
+    font-family: 'Poppins';
+}
+
+
+.sign-up-form
+{
+    max-width: 500px;
+    background-color: #eeeeee;
+
+}
+.jumbotron
+{
+    height: 30rem;
+}
+
+.navigation-bar
+{
+    background-color: #393e46;
+    
+}
+
+.log-in-button
+{
+    display: block;
+    margin: 1rem auto !important;
+}
+
+.login-modal
+{
+    background-color:#00adb5 !important;
+}
+
+.btn-secondary
+{
+    background-color: #222831 !important;
+}
+
+.nav-link
+{
+    color: #eeeeee !important;
+}
+
+.navbar-brand
+{
+    color: #eeeeee !important;
+}
+
+.Landing
+{
+    background-image: url("../images/tanner-van-dera-oaQ2mTeaP7o-unsplash.jpg");
+    background-size: cover;
+    padding: 7rem 0;
+}
+.jumboContent
+{
+    border: 1px solid black;
+    padding: 20px;
+    margin: 0 auto;
+    width: 50%;
+    background-color: rgba(255, 255, 255, .65);
+}
+.completedItem {
+    color:gray;
+    text-decoration: line-through;
+}
