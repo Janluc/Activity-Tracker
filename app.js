@@ -9,7 +9,7 @@ const express = require("express"),
       passportLocalMongoose = require("passport-local-mongoose"),
       methodOverride = require("method-override"),
       http = require("http").Server(app),
-      io = require("socket.io")(http);
+      io = require("socket.io")(http),
       env = require("dotenv").config()
 
 
