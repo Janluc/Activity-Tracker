@@ -19,7 +19,7 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 
-mongoose.connect(process.env.DATABASEURL, { 
+mongoose.connect(process.env.DATABASE_URL, { 
     useNewUrlParser: true,
     useCreateIndex: true
  }).then(function(){
