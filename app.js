@@ -19,7 +19,7 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 const uri = process.env.DATABASE_URL
-mongoose.connect(uri , { 
+mongoose.connect(uri, { 
     useNewUrlParser: true,
     useCreateIndex: true
  }).then(function(){
