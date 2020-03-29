@@ -19,7 +19,14 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 
-mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
+mongoose.connect(process.env.DATABASEURL, { 
+    useNewUrlParser: true,
+    useCreateIndex: true
+ }).then(function(){
+     console.log("Connected to DB!")
+ }).catch(function(err){
+     console.log("ERROR", err.message)
+ });
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
