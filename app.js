@@ -19,7 +19,9 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 const uri = process.env.DATABASE_URL
+const secretCode = process.env.SECRETCODE
 console.log(process.env.DATABASE_URL)
+console.log(process.env.SECRETCODE)
 mongoose.connect(uri, { 
     useNewUrlParser: true,
     useCreateIndex: true
@@ -36,7 +38,7 @@ app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
 
 app.use(require("express-session")({
-    secret: process.env.SECRETCODE,
+    secret: secretCode,
     resave: false,
     saveUninitialized: false
 }));
