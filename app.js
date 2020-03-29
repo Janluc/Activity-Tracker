@@ -18,8 +18,8 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
-url = process.env.DATABASEURL
-mongoose.connect(url, { useNewUrlParser: true });
+
+mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));

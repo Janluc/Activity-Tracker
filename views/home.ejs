@@ -4,11 +4,11 @@
     <div class="row justify-content-around mt-3">
         <div class="col-12 col-md-5 pt-3" style="background-color: white;">
             
-            <button type="button" class="btn login-modal-button btn-block" data-toggle="modal" data-target="#LogModal">
+            <button type="button" class="btn login-modal btn-block" data-toggle="modal" data-target="#exampleModal">
                 Add a Task!
               </button>
               
-              <div class="modal fade" id="LogModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -26,7 +26,7 @@
                                 <option value="Work">Work</option>
                                 <option value="Lifestyle">Lifestyle</option>
                             </select>
-                            <button class="btn login-modal-button rounded-pill">Submit</button>
+                            <button class="btn login-modal rounded-pill">Submit</button>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -68,7 +68,10 @@
                         <form method="POST" action="/schedule/<%=user._id%>/item/<%=item._id%>?_method=DELETE" style="display: inline">
                             <button >Del</button>
                         </form>
-                    </div>  
+                    </div>
+                    
+                    
+                    
                 </div>
 
 
@@ -88,6 +91,8 @@
         <canvas id="barChart" style="max-width: 500px;"></canvas>
 
     <p>Fitness: <%= user.fitness %> Work: <%= user.work %> Education: <%= user.education %> Lifestyle: <%= user.lifestyle %></p>
+
+
 
      </div>
     </div>
@@ -116,15 +121,18 @@ $(".toDoItem").click(function(){
 //socket init
 var socket = io()
 var itemID = document.getElementsByClassName('toDoItem')
+socket.on('test', function(data){
+    console.log(data.hello)
+})
 //socket emit when clicking on a To Do list item
-    for(var i = 0; i < itemID.length; i++)
-        {
-            itemID[i].addEventListener('click', function(){
-                if(currentUser)
-                socket.emit('identify', {dataID: this.innerText, userID: "<%=currentUser._id%>"})
-                console.log(this.innerText)
-            });
-        }
+for(var i = 0; i < itemID.length; i++)
+    {
+        itemID[i].addEventListener('click', function(){
+            socket.emit('identify', {dataID: this.innerText, userID: "<%=currentUser._id%>"})
+            console.log(this.innerText)
+        });
+    }
+
 
 
 </script>
