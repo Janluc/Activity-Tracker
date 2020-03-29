@@ -40,7 +40,8 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-http.listen(3000, function(){
+const PORT = process.env.PORT || 3000;
+http.listen(PORT, function(){
     console.log("Init on port 3000")
 });
 
