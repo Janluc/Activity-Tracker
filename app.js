@@ -18,8 +18,8 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
-
-mongoose.connect(process.env.DATABASE_URL, { 
+const uri = process.env.DATABASE_URL
+mongoose.connect(uri , { 
     useNewUrlParser: true,
     useCreateIndex: true
  }).then(function(){
