@@ -20,8 +20,7 @@ mongoose.set('useUnifiedTopology', true);
 
 const uri = process.env.DATABASE_URL
 const secretCode = process.env.SECRETCODE
-console.log(process.env.DATABASE_URL)
-console.log(process.env.SECRETCODE)
+
 mongoose.connect(uri, { 
     useNewUrlParser: true,
     useCreateIndex: true
